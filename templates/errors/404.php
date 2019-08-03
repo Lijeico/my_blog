@@ -25,7 +25,7 @@
             <div class="col-md-12 text-center">
                 <span class="display-1 d-block">404</span>
                 <div class="mb-4 lead"><?= $error ?></div>
-                <a href="/index.php" class="btn btn-link">Back to Home</a>
+                <a href="/" class="btn btn-link">Back to Home</a>
             </div>
         </div>
     </div>

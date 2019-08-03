@@ -3,6 +3,7 @@
 
 namespace MyProject\Controllers;
 
+use MyProject\Exceptions\AuthException;
 use MyProject\Exceptions\UserNotFoundException;
 use MyProject\Views\View;
 use MyProject\Models\Users\User;
@@ -88,5 +89,21 @@ class UsersController extends AbstractController
         }
 
         $this->view->renderHtml('users/login.php');
+    }
+
+    public function logout()
+    {
+        try {
+            if ($this->user !== null) {
+                if (isset($_COOKIE['token'])) {
+                    setcookie("token", "", time() - 1000, "/");
+                    header('Location: /');
+                    exit();
+                }
+            }
+            throw new AuthException('Вы не зарегистрированы', 401);
+        } catch (AuthException $e) {
+            $this->view->renderHtml('/errors/401.php', ['error' => $e->getMessage()], 403);
+        }
     }
 }

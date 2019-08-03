@@ -9,6 +9,8 @@ use MyProject\Controllers\MainController;
 use MyProject\Exceptions\DbException;
 use MyProject\Views\View;
 use MyProject\Exceptions\NotFoundException;
+use MyProject\Exceptions\AuthException;
+use MyProject\Exceptions\AccessForbidden;
 
 function myAutoLoader(string $className)
 {
@@ -24,7 +26,7 @@ try {
     $author = new User('Иван');
     $article = new Article('Заголовок', 'Текст', $author);
 
-    $controller = new MainController();
+    //$controller = new MainController();
 //$controller->main();
 
     $route = $_GET['route'] ?? '';
@@ -77,4 +79,10 @@ try {
 } catch (NotFoundException $e) {
     $view = new View(__DIR__ . '/../templates/errors');
     $view->renderHtml('404.php', ['error' => $e->getMessage()], 404);
+} catch (AuthException $e) {
+    $view = new View(__DIR__ . '/../templates/errors');
+    $view->renderHtml('401.php', ['error' => $e->getMessage()], 401);
+} catch (AccessForbidden $e) {
+    $view = new View(__DIR__ . '/../templates/errors');
+    $view->renderHtml('403.php', ['error' => $e->getMessage()], 403);
 }

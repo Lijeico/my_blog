@@ -137,7 +137,22 @@ class User extends ActiveRecordEntity
         $this->authToken = sha1(random_bytes(100)) . sha1(random_bytes(100));
     }
 
-    public function getAuthToken(): string {
+    public function getAuthToken(): string
+    {
         return $this->authToken;
     }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function allowEdit(): bool
+    {
+        if ($this === null || $this->getRole() !== 'admin') {
+            return false;
+        }
+        return true;
+    }
+
 }

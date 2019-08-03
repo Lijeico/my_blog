@@ -15,4 +15,6 @@ return [
     '~^users/register$~' => [UsersController::class, 'signUp'], //User registration
     '~^users/(\d+)/activate/(.+)$~' => [UsersController::class, 'activate'], //User account activating by email
     '~^users/login~' => [UsersController::class, 'login'], //User authentication
+    '~^users/logout~' => [UsersController::class, 'logout'], //User logout
+
 ];
