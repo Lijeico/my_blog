@@ -147,12 +147,5 @@ class User extends ActiveRecordEntity
         return $this->role;
     }
 
-    public function allowEdit(): bool
-    {
-        if ($this === null || $this->getRole() !== 'admin') {
-            return false;
-        }
-        return true;
-    }
 
 }

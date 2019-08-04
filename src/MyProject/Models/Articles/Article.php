@@ -17,9 +17,6 @@ class Article extends ActiveRecordEntity
     /** @var string */
     protected $authorId;
 
-    /** @var string */
-    protected $createdAt;
-
     public function getName(): string
     {
         return $this->name;

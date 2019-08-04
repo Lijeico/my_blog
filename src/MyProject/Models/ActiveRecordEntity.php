@@ -141,7 +141,6 @@ abstract class ActiveRecordEntity
             $propertyNameAsUnderscore = $this->camelCaseToUnderscore($propertyName);
             $mappedProperties[$propertyNameAsUnderscore] = $this->$propertyName;
         }
-
         return $mappedProperties;
     }
 

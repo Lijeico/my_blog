@@ -6,6 +6,7 @@ namespace MyProject\Controllers;
 use MyProject\Exceptions\AccessForbidden;
 use MyProject\Exceptions\AuthException;
 use MyProject\Models\ActiveRecordEntity;
+use MyProject\Models\Articles\Comment;
 use MyProject\Services\Db;
 use MyProject\Views\View;
 use MyProject\Models\Articles\Article;
@@ -41,8 +42,10 @@ class ArticlesController extends AbstractController
             throw new NotFoundException('Page not found!');
         }
 
+        $comments = Comment::findAll();
+
         $this->view->renderHtml('articles/view.php', [
-            'article' => $article, 'edit' => $this->user->allowEdit()
+            'article' => $article, 'edit' => $this->isEditable(), 'comments' => $comments
         ]);
     }
 
@@ -54,7 +57,7 @@ class ArticlesController extends AbstractController
             throw new NotFoundException();
         }
 
-        if (!$this->user->allowEdit()) {
+        if (!$this->isEditable()) {
             throw new AccessForbidden();
         }
 
@@ -124,6 +127,5 @@ class ArticlesController extends AbstractController
         $article->delete();
         var_dump($article);
     }
-
 
 }

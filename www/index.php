@@ -11,6 +11,7 @@ use MyProject\Views\View;
 use MyProject\Exceptions\NotFoundException;
 use MyProject\Exceptions\AuthException;
 use MyProject\Exceptions\AccessForbidden;
+use MyProject\Models\Articles\Comment;
 
 function myAutoLoader(string $className)
 {
